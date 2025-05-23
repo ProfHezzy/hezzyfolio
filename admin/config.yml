@@ -2,19 +2,21 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images/uploads"        # Where uploaded images go inside the repo
-public_folder: "/images/uploads"      # How they are accessed publicly via the site
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "blog"
     label: "Blog Posts"
-    folder: "posts"                   # This matches your existing /posts/ folder
+    folder: "posts"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"  # Auto-slug format for new posts
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "blog_post" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Categories", name: "categories", widget: "list", default: ["General"] }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
