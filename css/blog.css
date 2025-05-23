@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.post-card {
+  background: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 5px solid #007bff;
+  border-radius: 5px;
+}
