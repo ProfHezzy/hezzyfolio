@@ -1,18 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Profhezzy | Blog</title>
-  <link rel="stylesheet" href="css/blog.css">
-  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} | Prof. Hezzy</title>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/blog.css">
 </head>
 <body>
+  <!-- Navigation -->
+  <nav id="navbar-example" class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+          <a class="navbar-brand" href="#">Hezekiah<span>Ojenike</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <a class="nav-link active" href="#home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#about">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#skills">Skills</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#education">Education</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#projects">Projects</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#blog">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#contact">Contact</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <!-- Blog Header -->
+  <header class="blog-header">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8 mx-auto text-center">
+                  <div class="post-categories mb-3">
+                      {% for category in categories %}
+                      <a href="/blog/category/{{ category | slugify }}" class="badge bg-light text-dark me-2">{{ category }}</a>
+                      {% endfor %}
+                  </div>
+                  <h1 class="post-title">{{title}}</h1>
+                  <div class="post-meta">
+                      <span><i class="far fa-calendar-alt"></i> {{date | date: "%B %d, %Y"}}</span>
+                      <span class="mx-3">|</span>
+                      <span><i class="far fa-clock"></i> {{content | reading_time }} read</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
 
-<div class="container">
-  <h1>Profhezzy Blog</h1>
-  <div id="posts-container"></div>
-</div>
+    <!-- Main Content -->
+    <main class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Featured Image -->
+                <div class="featured-image">
+                    <img src="{{image}}" alt="{{title}}" class="img-fluid">
+                </div>
+                
+                <!-- Post Content -->
+                <article class="post-content">
+                    {{body | markdownify}}
+                </article>
+                
+                <!-- Tags -->
+                <div class="post-tags">
+                    <h5>Tags:</h5>
+                    {% for tag in tags %}
+                    <a href="/blog/tag/{{ tag | slugify }}" class="tag-badge">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                
+                <!-- Author Box -->
+                <div class="author-box">
+                    <img src="/images/profile.jpg" alt="Hezekiah Ojenike" class="author-avatar">
+                    <div>
+                        <h4>Hezekiah Ojenike</h4>
+                        <p>Full-stack Developer with 5+ years of experience building web applications. I create responsive, user-friendly, and scalable solutions.</p>
+                        <div class="social-links">
+                            <a href="https://github.com/ProfHezzy/"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/profhezzy/"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://x.com/Kvng_Hezzy"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Posts -->
+                <section class="related-posts">
+                    <h3 class="mb-4">You Might Also Like</h3>
+                    <div class="row">
+                        <!-- These would be dynamically generated -->
+                        <div class="col-md-4">
+                            <div class="card related-post-card">
+                                <img src="/images/blog/web-dev.jpg" class="card-img-top" alt="Web Development Trends">
+                                <div class="card-body">
+                                    <h5 class="card-title">Web Development Trends</h5>
+                                    <a href="/blog/web-dev-trends" class="btn btn-sm btn-outline-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card related-post-card">
+                                <img src="/images/blog/python.jpg" class="card-img-top" alt="Python Tips">
+                                <div class="card-body">
+                                    <h5 class="card-title">Python Optimization</h5>
+                                    <a href="/blog/python-tips" class="btn btn-sm btn-outline-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card related-post-card">
+                                <img src="/images/blog/django.jpg" class="card-img-top" alt="Django Security">
+                                <div class="card-body">
+                                    <h5 class="card-title">Django Security</h5>
+                                    <a href="/blog/django-security" class="btn btn-sm btn-outline-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Comments Section -->
+                <section class="comments-section">
+                    <h3 class="mb-4">Discussion</h3>
+                    <div id="disqus_thread"></div>
+                    <script>
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://your-disqus-shortname.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                </section>
+            </div>
+        </div>
+    </main>
 
-<script src="js/blog.js"></script>
+    <!-- Footer (Same as your portfolio) -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Reading Time Calculation -->
+    <script>
+        // Calculate reading time
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.post-content');
+            const text = content.textContent;
+            const wordCount = text.trim().split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / 200); // 200 words per minute
+            
+            const readingTimeElements = document.querySelectorAll('.reading-time');
+            readingTimeElements.forEach(el => {
+                el.textContent = readingTime + ' min';
+            });
+        });
+    </script>
 </body>
 </html>
